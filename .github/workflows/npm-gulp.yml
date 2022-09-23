@@ -23,8 +23,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Build
-      run: |
-        npm install -g @angular/cli
-        |
-        ng build
-        
+    - run: npm install -g @angular/cli
+    - run: ng build
