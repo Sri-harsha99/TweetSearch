@@ -5,6 +5,13 @@ import {
   HttpHeaders,
   HttpParams,
 } from "@angular/common/http";
+import { HomeService } from '../home.service';
+import * as tf from '@tensorflow/tfjs';
+import words from '../../assets/word_dict.json';
+
+// var tokeniser = require('node_modules\string-tokeniser\index.js')
+// import { tokeniser } from '../../../node_modules/string-tokeniser/index';
+// import { tokeniser } from 'string-tokeniser';
 
 @Component({
   selector: 'app-home',
@@ -16,29 +23,27 @@ export class HomeComponent implements OnInit {
   inputReddit = "";
   from = "";
   to = "";
-  flaskURL = '';
-  url = 'https://api.pushshift.io/reddit/search/comment/?subreddit='
+  data:any;
+  tokenizer:any;
+  wordDict: any;
+  nodeURL = 'https://serverless-tweet.azurewebsites.net/api/HttpTrigger3?code=7J111qj4uroIibIKhVlrOnXLA6IWqu2kPCj7IGL_azqMAzFunK1Y2Q==';
 
-  constructor(    private http: HttpClient,) { }
+  constructor(    private http: HttpClient,private homeService: HomeService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
   }
 
   getData(){
-    let httpParams = new HttpParams();
-    if (this.from) {
-      httpParams = httpParams.set("from", new Date(this.from).getTime().toString());
-    }
-    if(this.to){
-      httpParams = httpParams.set("to", new Date(this.to).getTime().toString());
-    } else{
-      httpParams = httpParams.set("to", new Date().getTime().toString());
-    }
-    this.http.get<any>(this.flaskURL,{params: httpParams}).subscribe((data) => {
-      if(data){
-        console.log(data)
+    this.homeService.homeApi({ query: this.inputReddit }).subscribe(
+
+      (res) => {
+        console.log(res);
+        this.data = res.data
+      },
+      (err) => {
+        console.error(err);
       }
-    });
-  }
+    );
+}
 
   }

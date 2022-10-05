@@ -21,9 +21,12 @@
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
+    "@tensorflow/tfjs": "^3.6.0",
     "ngx-material-timepicker": "^5.5.3",
     "rxjs": "~7.5.0",
+    "string-tokeniser": "^1.0.5",
     "tslib": "^2.3.0",
+    "twitter-api-sdk": "^1.1.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

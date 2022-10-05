@@ -6,7 +6,7 @@ App allows us to find the current sentiment of the subreddit by analyzing it's p
             <div>
                 <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label>Subreddit</mat-label>
-                    <input matInput placeholder="Ex: r/news" [(ngModel)]="inputReddit" (click)="getData()">
+                    <input matInput placeholder="Ex: r/news" [(ngModel)]="inputReddit">
                 </mat-form-field>
                 <div fxLayout="row" fxLayoutAlign="space-around center">
                     <div class="filter">
@@ -30,8 +30,11 @@ App allows us to find the current sentiment of the subreddit by analyzing it's p
         </div>
         <div class="margin-left-5" fxLayout="column" fxLayoutAlign="center center">
             <div>
-                <button mat-raised-button color="primary">Find</button>
+                <button mat-raised-button color="primary" (click)="getData()">Find</button>
             </div>
         </div>
     </div>
+</div>
+<div>
+    {{ data | json }}
 </div>
