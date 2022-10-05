@@ -9,6 +9,8 @@ import { HomeService } from '../home.service';
 import * as tf from '@tensorflow/tfjs';
 import words from '../../assets/word_dict.json';
 import { ChartOptions } from 'chart.js';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 // var tokeniser = require('node_modules\string-tokeniser\index.js')
 // import { tokeniser } from '../../../node_modules/string-tokeniser/index';
@@ -35,6 +37,7 @@ export class HomeComponent implements OnInit {
   public pieChartDatasets = [ {
     data: [ 300, 500, 100 ]
   } ];
+  destroy$: Subject<boolean> = new Subject<boolean>();
   public pieChartLegend = true;
   constructor(    private http: HttpClient,private homeService: HomeService) { }
 
@@ -42,16 +45,19 @@ export class HomeComponent implements OnInit {
   }
 
   getData(){
-    this.homeService.homeApi({ query: this.inputReddit }).subscribe(
-      (res) => {
-        console.log(res);
-        this.data = res.data;
+    this.homeService.homeApi({ query: this.inputReddit }).pipe(takeUntil(this.destroy$)).subscribe((data: any[]) => {
+      console.log(data);
+    });
+    // this.homeService.homeApi().subscribe(
+    //   (res) => {
+    //     console.log(res);
+    //     this.data = res.data;
         
-      },
-      (err) => {
-        console.error(err);
-      }
-    );
+    //   },
+    //   (err) => {
+    //     console.error(err);
+    //   }
+    // );
 }
 
   }

@@ -10,7 +10,8 @@ export class HomeService {
   constructor(private http: HttpClient,) { }
 
   homeApi(data:any){
-    const httpParams = new HttpParams().set("query", data.query);
+    let httpParams = new HttpParams().set("query", data.query);
+    httpParams = httpParams.set("Content-Type", 'application/json');
     return this.http.get<any>(this.nodeURL, {params:httpParams});
   }
 }
