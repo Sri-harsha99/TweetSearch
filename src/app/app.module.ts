@@ -28,6 +28,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { NgChartsModule } from 'ng2-charts';
 import { MatSliderModule } from "@angular/material/slider";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -45,6 +46,7 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
   ],
   imports: [
     BrowserModule,
+    NgChartsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,

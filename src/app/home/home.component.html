@@ -36,5 +36,14 @@ App allows us to find the current sentiment of the subreddit by analyzing it's p
     </div>
 </div>
 <div>
+    <canvas baseChart
+        [type]="'pie'"
+        [datasets]="pieChartDatasets"
+        [labels]="pieChartLabels"
+        [options]="pieChartOptions"
+        [legend]="pieChartLegend">
+    </canvas>
+</div>
+<div>
     {{ data | json }}
 </div>
