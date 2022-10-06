@@ -1,6 +1,6 @@
 <div *ngIf="type == 'home'">
     <div class="padding-left">
-        App allows us to find the people's sentiment regarding something by parsing the tweets based on the key term. Only tweets from last 7 days can be parsed as the app is using twitter API with only essential access. We can also choose how many tweets to analyze (Default is 500). It can be increased, but request will take longer duration.
+        App allows us to find the people's sentiment regarding something by parsing the tweets based on the key term. Only tweets from last 7 days can be parsed as the app is using twitter API with only essential access. We can also choose how many tweets to analyze (Default is 500). It can be increased, but request will take longer duration. As I only have essential level access to Twitter API, the app can only parse tweets from last 7 days.
     </div>
     <div class="margin-top-7" fxLayoutAlign="center enter">
         <div class="margin-left-3" fxLayout="row">
@@ -16,13 +16,13 @@
                         </div>
                         <mat-form-field class="date margin-left-date" appearance="outline">
                             <mat-label>From</mat-label>
-                            <input matInput [matDatepicker]="from" [(ngModel)]="fromDate">
+                            <input matInput [min]="this.minDate" [max]="this.maxDate" [matDatepicker]="from" [(ngModel)]="fromDate">
                             <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
                             <mat-datepicker #from></mat-datepicker>
                         </mat-form-field>
                         <mat-form-field class="date margin-left-date" appearance="outline">
                             <mat-label>To</mat-label>
-                            <input matInput [matDatepicker]="to" [(ngModel)]="toDate">
+                            <input matInput [min]="fromDate ? fromDate : this.minDate" [max]="this.maxDate" [matDatepicker]="to" [(ngModel)]="toDate">
                             <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
                             <mat-datepicker #to></mat-datepicker>
                         </mat-form-field>
@@ -30,7 +30,7 @@
                         <div fxLayout="column" fxLayoutAlign="start">
                             <mat-form-field appearance="outline">
                                 <mat-label>Maximum Tweets to parse</mat-label>
-                                <input matInput type="number" [(ngModel)]="maximum" (ngModelChange)="maxChanged($event)">
+                                <input matInput type="number" min="1" max="5000" [(ngModel)]="maximum" (ngModelChange)="maxChanged($event)">
                             </mat-form-field>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
             [legend]="pieChartLegend">
         </canvas>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center center" class="width-100">
+    <div fxLayout="row" *ngIf="done && !isCall" fxLayoutAlign="center center" class="width-100 margin-top-2">
         <mat-accordion class="width-80">
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
               <mat-expansion-panel-header>
@@ -64,12 +64,12 @@
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <div>
-                <mat-paginator [length]="10"
-                    [pageSize]="100"
+                <mat-paginator [length]="posNumber"
+                    [pageSize]="50"
                     (page)="changePage($event,'positive')"
                     aria-label="Select page">
                 </mat-paginator>
-                <div class="" *ngFor="let tweet of currPositiveTweets">
+                <div class="margin-bottom-1" *ngFor="let tweet of currPositiveTweets">
                     {{ tweet }}
                 </div>
               </div>
@@ -82,12 +82,12 @@
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <div>
-                <mat-paginator [length]="100"
-                    [pageSize]="10"
+                <mat-paginator [length]="negNumber"
+                    [pageSize]="50"
                     (page)="changePage($event,'negative')"
                     aria-label="Select page">
                 </mat-paginator>
-                <div *ngFor="let tweet of currNegativeTweets">
+                <div class="margin-bottom-1" *ngFor="let tweet of currNegativeTweets">
                     {{ tweet }}
                 </div>
               </div>
@@ -111,7 +111,7 @@
         <img class="width-22" src="../../assets/harsha.jpg">
     </div>
     <div class="width-45">
-        Actively seeking summer internship oppurtunities, I'm currently pursuing Masters in Computer science at University of Texas at Dallas. I have previously worked as software engineer at ShopConnect.live for one year and completed my graduation in computer science from Indian Institute of Information Technology, Sri City. 
+        I'm currently pursuing Masters in Computer science at University of Texas at Dallas. I have previously worked as Software Engineer at ShopConnect.live for one year and completed my graduation in Computer Science from Indian Institute of Information Technology, Sri City. 
 
         <ul>
             <li><a href="https://github.com/Sri-harsha99">My Github</a></li>

@@ -27,6 +27,8 @@ export class HomeComponent implements OnInit {
   fromDate:any;
   toDate:any;
   done = false;
+  posNumber: any;
+  negNumber: any;
   tokenizer:any;
   panelOpenState = false;
   isCall = false;
@@ -48,6 +50,20 @@ export class HomeComponent implements OnInit {
   } ];
   destroy$: Subject<boolean> = new Subject<boolean>();
   public pieChartLegend = true;
+  fromFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  };
+  toFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  };
+  minDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+  maxDate = new Date();
+  toMinDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+
   constructor(    private http: HttpClient,private homeService: HomeService) { }
 
   ngOnInit(): void {  
@@ -61,6 +77,7 @@ export class HomeComponent implements OnInit {
     this.isCall = true;
     let pos = 0;
     let neg = 0;
+    this.emptyData();
     this.homeService.homeApi({ query: this.inputReddit, startTime:this.fromDate, endTime: this.toDate, max:this.maximum }).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
       if(data){
         console.log(data);
@@ -78,9 +95,18 @@ export class HomeComponent implements OnInit {
             }
         });
         this.pieChartDatasets = [ { data: [ neg, pos]} ];
+        this.currPositiveTweets = this.positiveTweets.slice(0,100)
+        this.currNegativeTweets = this.negativeTweets.slice(0,100)
+        this.posNumber = this.positiveTweets.length;
+        this.negNumber = this.negativeTweets.length;
       }
       this.isCall = false;
     });
+}
+
+emptyData(){
+  this.positiveTweets = [];
+  this.negativeTweets = [];
 }
 
 maxChanged(data: any){
@@ -94,9 +120,9 @@ maxChanged(data: any){
 
   changePage(page:any,type:any){
     if(type === 'positive'){
-      this.currPositiveTweets = this.positiveTweets.slice((page*100)-100,page*100)
+      this.currPositiveTweets = this.positiveTweets.slice(page.pageIndex*100,(page.pageIndex+1)*100)
     } else{
-      this.currNegativeTweets = this.negativeTweets.slice((page*100)-100,page*100)
+      this.currNegativeTweets = this.negativeTweets.slice(page.pageIndex*100,(page.pageIndex+1)*100)
     }
   }
 

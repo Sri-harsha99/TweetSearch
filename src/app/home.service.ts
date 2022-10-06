@@ -11,8 +11,12 @@ export class HomeService {
 
   homeApi(data:any){
     let httpParams = new HttpParams().set("query", data.query);
-    httpParams = httpParams.set("startTime", data.startTime.toISOString());
-    httpParams = httpParams.set("endTime", data.endTime.toISOString());
+    if(data.startTime?.length){
+      httpParams = httpParams.set("startTime", data.startTime.toISOString());
+    }
+    if(data.endTime?.length){
+      httpParams = httpParams.set("endTime", data.endTime.toISOString());
+    }
     httpParams = httpParams.set("max", data.max);
     httpParams = httpParams.set("Content-Type", 'application/json');
     return this.http.get<any>(this.nodeURL, {params:httpParams});
