@@ -73,6 +73,9 @@ export class HomeComponent implements OnInit {
     if(this.maximum > 5000){
       this.maximum = 5000;
     }
+    if(!this.inputReddit.length){
+      return
+    }
     this.done = false;
     this.isCall = true;
     let pos = 0;
