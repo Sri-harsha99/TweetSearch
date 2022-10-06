@@ -3,15 +3,10 @@
    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
-  <span class="margin-left-4">My App</span>
-  <span class="margin-left-4">Intresting Findings</span>
-  <span class="example-spacer"></span>
-  <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-   <mat-icon>share</mat-icon>
- </button> -->
+  <span (click)="type = 'home'" class="margin-left-4 click-point">Home</span>
+  <!-- <span class="margin-left-4">Intresting Findings</span> -->
+  <span (click)="type = 'diagram'" class="margin-left-4 click-point">How it works</span>
+  <span (click)="type = 'me'" class="margin-left-4 click-point">Me</span>
 </mat-toolbar>
 </p>
-<app-home></app-home>
+<app-home [type]="type"></app-home>

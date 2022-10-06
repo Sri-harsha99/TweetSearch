@@ -26,6 +26,7 @@
     "ng2-charts": "^4.0.1",
     "ngx-material-timepicker": "^5.5.3",
     "rxjs": "~7.5.0",
+    "spinners-angular": "^0.0.5",
     "string-tokeniser": "^1.0.5",
     "tslib": "^2.3.0",
     "twitter-api-sdk": "^1.1.0",

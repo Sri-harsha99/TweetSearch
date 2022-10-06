@@ -38,6 +38,8 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from "@angular/material/core";
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { SpinnersAngularModule } from 'spinners-angular';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
+    SpinnersAngularModule,
     MatInputModule,
     MatNativeDateModule,
     MatFormFieldModule,
@@ -71,6 +74,7 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     MatMenuModule,
     ReactiveFormsModule,
     MatTreeModule,
+    MatPaginatorModule,
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,

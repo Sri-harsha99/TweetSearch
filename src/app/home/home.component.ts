@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {
   HttpBackend,
   HttpClient,
@@ -11,10 +11,7 @@ import words from '../../assets/word_dict.json';
 import { ChartOptions } from 'chart.js';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-
-// var tokeniser = require('node_modules\string-tokeniser\index.js')
-// import { tokeniser } from '../../../node_modules/string-tokeniser/index';
-// import { tokeniser } from 'string-tokeniser';
+import { any } from '@tensorflow/tfjs';
 
 @Component({
   selector: 'app-home',
@@ -27,15 +24,27 @@ export class HomeComponent implements OnInit {
   from = "";
   to = "";
   data:any;
+  fromDate:any;
+  toDate:any;
+  done = false;
   tokenizer:any;
+  panelOpenState = false;
+  isCall = false;
   wordDict: any;
+  maximum = 500;
+  currPositiveTweets:any = [];
+  currNegativeTweets:any = [];
+  positiveTweets:any = [];
+  negativeTweets:any = [];
+  countError = false;
+  @Input() type!: string;
   nodeURL = 'https://serverless-tweet.azurewebsites.net/api/HttpTrigger3?code=7J111qj4uroIibIKhVlrOnXLA6IWqu2kPCj7IGL_azqMAzFunK1Y2Q==';
   public pieChartOptions: ChartOptions<'pie'> = {
     responsive: false,
   };
-  public pieChartLabels = [ [ 'Download', 'Sales' ], [ 'In', 'Store', 'Sales' ], 'Mail Sales' ];
+  public pieChartLabels = [ [ 'Negative'], [ 'Positive']];
   public pieChartDatasets = [ {
-    data: [ 300, 500, 100 ]
+    data: [ 300, 500]
   } ];
   destroy$: Subject<boolean> = new Subject<boolean>();
   public pieChartLegend = true;
@@ -45,19 +54,50 @@ export class HomeComponent implements OnInit {
   }
 
   getData(){
-    this.homeService.homeApi({ query: this.inputReddit }).pipe(takeUntil(this.destroy$)).subscribe((data: any[]) => {
-      console.log(data);
+    if(this.maximum > 5000){
+      this.maximum = 5000;
+    }
+    this.done = false;
+    this.isCall = true;
+    let pos = 0;
+    let neg = 0;
+    this.homeService.homeApi({ query: this.inputReddit, startTime:this.fromDate, endTime: this.toDate, max:this.maximum }).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+      if(data){
+        console.log(data);
+        this.done = true;
+        let predicts = data.predicts.slice(0, -1);
+        predicts = predicts.substring(1);
+        predicts = predicts.split(" ");
+        predicts.forEach((ele: any,index: any)=> {
+            if(ele == '1'){
+              pos += 1
+              this.positiveTweets.push(data.tweets[index]);
+            }else{data
+              neg += 1
+              this.negativeTweets.push(data.tweets[index]);
+            }
+        });
+        this.pieChartDatasets = [ { data: [ neg, pos]} ];
+      }
+      this.isCall = false;
     });
-    // this.homeService.homeApi().subscribe(
-    //   (res) => {
-    //     console.log(res);
-    //     this.data = res.data;
-        
-    //   },
-    //   (err) => {
-    //     console.error(err);
-    //   }
-    // );
 }
 
+maxChanged(data: any){
+  console.log(this.fromDate)
+  if(data<=5000){
+    this.countError = false;
+  } else{
+    this.countError = true;
   }
+}
+
+  changePage(page:any,type:any){
+    if(type === 'positive'){
+      this.currPositiveTweets = this.positiveTweets.slice((page*100)-100,page*100)
+    } else{
+      this.currNegativeTweets = this.negativeTweets.slice((page*100)-100,page*100)
+    }
+  }
+
+}

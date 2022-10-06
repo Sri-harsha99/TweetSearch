@@ -1,49 +1,121 @@
-App allows us to find the current sentiment of the subreddit by analyzing it's posts and comments. We can also filter the data by date so that we can find any subreddit's mood at a period of time.
-
-<div fxLayoutAlign="center enter">
-    <div fxLayout="row">
-        <div fxLayout="row">
-            <div>
-                <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Subreddit</mat-label>
-                    <input matInput placeholder="Ex: r/news" [(ngModel)]="inputReddit">
-                </mat-form-field>
-                <div fxLayout="row" fxLayoutAlign="space-around center">
-                    <div class="filter">
-                        Filter by Date:
-                    </div>
-                        <mat-form-field class="date margin-left-2" appearance="outline">
+<div *ngIf="type == 'home'">
+    <div class="padding-left">
+        App allows us to find the people's sentiment regarding something by parsing the tweets based on the key term. Only tweets from last 7 days can be parsed as the app is using twitter API with only essential access. We can also choose how many tweets to analyze (Default is 500). It can be increased, but request will take longer duration.
+    </div>
+    <div class="margin-top-7" fxLayoutAlign="center enter">
+        <div class="margin-left-3" fxLayout="row">
+            <div fxLayout="row">
+                <div>
+                    <mat-form-field class="input-key" appearance="outline">
+                        <mat-label>Key word</mat-label>
+                        <input matInput placeholder="Ex: Queen Elizabeth" [(ngModel)]="inputReddit">
+                    </mat-form-field>
+                    <div fxLayout="row" class="pos-rel" fxLayoutAlign="space-around center">
+                        <div class="filter">
+                            Filter by Date:
+                        </div>
+                        <mat-form-field class="date margin-left-date" appearance="outline">
                             <mat-label>From</mat-label>
-                            <input matInput [matDatepicker]="from">
+                            <input matInput [matDatepicker]="from" [(ngModel)]="fromDate">
                             <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
                             <mat-datepicker #from></mat-datepicker>
                         </mat-form-field>
-                        <mat-form-field class="date margin-left-2" appearance="outline">
+                        <mat-form-field class="date margin-left-date" appearance="outline">
                             <mat-label>To</mat-label>
-                            <input matInput [matDatepicker]="to">
+                            <input matInput [matDatepicker]="to" [(ngModel)]="toDate">
                             <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
                             <mat-datepicker #to></mat-datepicker>
                         </mat-form-field>
-                
+                        <mat-divider class="mat-divide" [vertical]="true"></mat-divider>
+                        <div fxLayout="column" fxLayoutAlign="start">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Maximum Tweets to parse</mat-label>
+                                <input matInput type="number" [(ngModel)]="maximum" (ngModelChange)="maxChanged($event)">
+                            </mat-form-field>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="margin-left-5" fxLayout="column" fxLayoutAlign="center center">
-            <div>
-                <button mat-raised-button color="primary" (click)="getData()">Find</button>
+            <div class="margin-left-5" fxLayout="column" fxLayoutAlign="center center">
+                <div>
+                    <button mat-raised-button color="primary" (click)="maximum<=5000 ? getData() : countError = true">Find</button>
+                </div>
+            </div>
+            <div [ngClass]="isCall ? 'show-class' : 'hide-class'" class="sc-margin-left-2" fxLayoutAlign="center center">
+                <sa-spinner-dotted [enabled]="true" [color]="'#000000'"></sa-spinner-dotted>
             </div>
         </div>
     </div>
+    <div *ngIf="done && !isCall" fxLayoutAlign="center enter">
+        <canvas baseChart
+            [type]="'pie'"
+            [datasets]="pieChartDatasets"
+            [labels]="pieChartLabels"
+            [options]="pieChartOptions"
+            [legend]="pieChartLegend">
+        </canvas>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="width-100">
+        <mat-accordion class="width-80">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Tweets classified positively
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div>
+                <mat-paginator [length]="10"
+                    [pageSize]="100"
+                    (page)="changePage($event,'positive')"
+                    aria-label="Select page">
+                </mat-paginator>
+                <div class="" *ngFor="let tweet of currPositiveTweets">
+                    {{ tweet }}
+                </div>
+              </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Tweets classified negatively
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div>
+                <mat-paginator [length]="100"
+                    [pageSize]="10"
+                    (page)="changePage($event,'negative')"
+                    aria-label="Select page">
+                </mat-paginator>
+                <div *ngFor="let tweet of currNegativeTweets">
+                    {{ tweet }}
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+    </div>
 </div>
-<div>
-    <canvas baseChart
-        [type]="'pie'"
-        [datasets]="pieChartDatasets"
-        [labels]="pieChartLabels"
-        [options]="pieChartOptions"
-        [legend]="pieChartLegend">
-    </canvas>
+<div fxLayout="column" fxLayoutAlign="center center" *ngIf="type == 'diagram'">
+    <img src="../../assets/flow-d.png">
+    <div class="margin-top-2 font-15">
+        <ul>
+            <li>The classification of tweets into postive and negative sentiments is done by using a logistic regression model trained on 1.6 million tweet dataset.</li>
+            <li>Later, the model has been imported into a flask app that is now running using Azure functions.</li>
+            <li>A nodeJS function is used to pull the data from the twitter API, and push it to flask function. Flask function returns with predictions.</li>
+            <li>Tweets are segragated and the data is shown using pie chart on the client browser using Angular.</li>
+          </ul>  
+    </div>
 </div>
-<div>
-    {{ data | json }}
+<div fxLayout="column" fxLayoutAlign="center center" class="width-100" *ngIf="type == 'me'">
+    <div>
+        <img class="width-22" src="../../assets/harsha.jpg">
+    </div>
+    <div class="width-45">
+        Actively seeking summer internship oppurtunities, I'm currently pursuing Masters in Computer science at University of Texas at Dallas. I have previously worked as software engineer at ShopConnect.live for one year and completed my graduation in computer science from Indian Institute of Information Technology, Sri City. 
+
+        <ul>
+            <li><a href="https://github.com/Sri-harsha99">My Github</a></li>
+            <li><a href="https://www.linkedin.com/in/sriharshamaddirala/">My LinkedIn</a></li>
+        </ul> 
+    </div>
 </div>
