@@ -22,6 +22,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatTreeModule } from "@angular/material/tree";
+import { MatChip, MatChipsModule, MatChipList } from '@angular/material/chips';
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
@@ -40,6 +41,8 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from "@angular/material/core";
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { SpinnersAngularModule } from 'spinners-angular';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MzdTimelineModule } from 'ngx-mzd-timeline';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     BrowserModule,
     NgChartsModule,
     AppRoutingModule,
+    FontAwesomeModule,
+    MatChipsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
@@ -76,6 +81,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatTreeModule,
     MatPaginatorModule,
     MatAutocompleteModule,
+    MzdTimelineModule,
     MatFormFieldModule,
     MatInputModule,
     FormsModule,

@@ -12,6 +12,11 @@ import { ChartOptions } from 'chart.js';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { any } from '@tensorflow/tfjs';
+import { faBriefcase } from '@fortawesome/free-solid-svg-icons';
+import { faGraduationCap } from '@fortawesome/free-solid-svg-icons';
+import { faCode } from '@fortawesome/free-solid-svg-icons';
+import { faDatabase } from '@fortawesome/free-solid-svg-icons';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +29,8 @@ export class HomeComponent implements OnInit {
   from = "";
   to = "";
   data:any;
+  fileUrl = 'assets/VenkataSriHarshaMaddiralaResume.pdf';
+  fileName = 'Venkata Sri Harsha Resume.pdf'
   fromDate:any;
   toDate:any;
   done = false;
@@ -31,6 +38,11 @@ export class HomeComponent implements OnInit {
   negNumber: any;
   tokenizer:any;
   panelOpenState = false;
+  profile:any;
+  faBriefcase = faBriefcase;
+  faGraduationCap = faGraduationCap;
+  faDatabase = faDatabase;
+  faDownload = faDownload;
   isCall = false;
   wordDict: any;
   maximum = 500;
@@ -119,6 +131,21 @@ maxChanged(data: any){
   } else{
     this.countError = true;
   }
+}
+downloadResume(){
+
+      const a = document.createElement("a");
+      a.style.display = "none";
+      a.href = this.fileUrl;
+      a.download = this.fileName;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+}
+
+viewResume() {
+  window.open(this.fileUrl, "_blank");
 }
 
   changePage(page:any,type:any){

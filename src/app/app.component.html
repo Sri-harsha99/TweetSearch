@@ -4,10 +4,10 @@
       <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
       </button>
+      <span (click)="type = 'me'" class="margin-left-4 click-point">Portfolio</span>
       <span (click)="type = 'home'" class="margin-left-4 click-point">Search Tweets</span>
       <!-- <span class="margin-left-4">Intresting Findings</span> -->
       <span (click)="type = 'diagram'" class="margin-left-4 click-point">How it works</span>
-      <span (click)="type = 'me'" class="margin-left-4 click-point">Me</span>
     </div>
   <div class="right-0">
     <img class="right-0" src="../assets/image.svg" (click)="link('github')" class="margin-left-3 click-point">

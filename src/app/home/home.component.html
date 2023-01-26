@@ -109,16 +109,204 @@
           </ul>  
     </div>
 </div>
-<div fxLayout="column" fxLayoutAlign="center center" class="width-100" *ngIf="type == 'me'">
-    <div>
-        <img class="width-22" src="../../assets/harsha.jpg">
+<div fxLayout="row" fxLayoutAlign="center center" class="width-100 margin-top-2 margin-bottom-1" *ngIf="type == 'me'">
+    <!-- <div fxLayout="column">
+        <div>
+            <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-subtitle>Computer Science Graduate Student</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <div fxLyout="row" fxLayoutAlign="start center">
+                        <div>
+                            <img src="../../assets/harsha.jpg" class="img-fluid" alt="avatar">
+                        </div>
+                        <div fxLayout="column">
+                            <b>Harsha Maddirala</b>
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                <div class="margin-right-2cm"><mat-icon>email</mat-icon></div>
+                                <div><a href="mailto:sri.harsha@outlook.in">sri.harsha@outlook.in</a></div>
+                            </div>
+                            <button mat-raised-button color="primary" (click)="downloadResume()">Download Resume</button>
+                            <button mat-raised-button color="primary" (click)="viewResume()">View Resume</button>
+                        </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                    </div>
+                  <p>This card has divider and indeterminate progress as footer</p>
+                  <mat-divider></mat-divider>
+                </mat-card-content>
+                <mat-card-footer>
+                </mat-card-footer>
+              </mat-card>
+        </div>
+        <div class="margin-top-5">
+            <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-subtitle>About Me</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>I'm currently pursuing Masters in Computer science at University of Texas at Dallas. I have previously worked as Software Engineer at ShopConnect.live for one year.</p>
+                  <mat-divider></mat-divider>
+                </mat-card-content>
+            </mat-card>
+            <img class="width-22" src="../../assets/harsha.jpg">
+        </div>
     </div>
-    <div class="width-45">
-        I'm currently pursuing Masters in Computer science at University of Texas at Dallas. I have previously worked as Software Engineer at ShopConnect.live for one year and completed my graduation in Computer Science from Indian Institute of Information Technology, Sri City. 
+    <div fxLayout="column" class="width-45"> 
 
         <ul>
             <li><a href="https://github.com/Sri-harsha99">My Github</a></li>
             <li><a href="https://www.linkedin.com/in/sriharshamaddirala/">My LinkedIn</a></li>
         </ul> 
+    </div> -->
+    <div class="margin-right-2" fxLayout="column">
+      <div class="margin-bot-3">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div fxLayout="row">
+              <div>
+                <img class="pro-img" src="../../assets/harsha.jpg">
+              </div>
+              <div>
+                <mat-card-title>Harsha Maddirala</mat-card-title>
+                <span>Graduate Student</span><br>
+                <span>Dallas, US</span><br>
+                <div class="link-css" fxLayout="row" fxLayoutAlign="start center">
+                  <img class="mail-icon" src="../../assets/mail.svg">
+                  <a href="mailto:vxm220023@utdallas.edu">vxm220023@utdallas.edu</a>
+                </div>
+                <div class="link-css" fxLayout="row" fxLayoutAlign="start center">
+                  <img class="mail-icon" src="../assets/image.svg">
+                  <a href="https://github.com/Sri-harsha99">Github</a>
+                </div>
+                <div class="link-css" fxLayout="row" fxLayoutAlign="start center">
+                  <img class="mail-icon" src="../assets/link.svg">
+                  <a href="https://www.linkedin.com/in/sriharshamaddirala/">LinkedIN</a>
+                </div>
+                <button mat-raised-button (click)="downloadResume()">Resume <mat-icon>cloud_download</mat-icon></button>
+              </div>
+            </div>
+          </mat-card-header>
+        </mat-card>
+      </div>
+      <div>
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>About Me</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>I'm a graduate CS student at UTD.</p>
+            <p>I will be graduating in May 2024, and I am currently looking for summer internships.</p>
+            <p>In my free time, I love to play games and read history books.</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
     </div>
+    <div fxLayout="column">
+      <div class="timeline">
+        <mzd-timeline class="change-pad" [alternateSide]="false" [firstContentSide]="'right'">
+          <mzd-icon><fa-icon class="icon-time" [icon]="faGraduationCap"></fa-icon></mzd-icon>
+          <mzd-timeline-content class="add-pad">
+            <div class="head">Master of Science in Computer Science (Aug 2022 - May 2024)</div>
+            <div class="italic bot-mar-1">The University of Texas at Dallas</div>
+            <div>CGPA: 3.8/4.0</div>
+            <div>Relevant Courses: Statistical Methods for Data Science, Computer Vision, Machine Learning, Artificial Intelligence.</div>
+          </mzd-timeline-content>
+          
+          <mzd-icon><fa-icon class="icon-time" [icon]="faBriefcase"></fa-icon></mzd-icon>
+          <mzd-timeline-content class="add-pad">
+            <div class="head">Software Developer (July 2021 - July 2022)</div>
+            <div class="italic bot-mar-1">ShopConnect.live, Banglore, India</div>
+            <div>Worked on developing a video-call based e-commerce application. Developed the Application using Angular, NodeJS, MongoDB, Springboot, and AWS. Applied ML techniques to optimize the workflows. Integrated Instagram Graph API to publish and moderate content on the user’s Instagram profile in less than 5 seconds. Improved the overall performance by reducing the latency of more than 20 APIs.
+              
+              </div>
+        </mzd-timeline-content>
+        <mzd-icon><fa-icon class="icon-time" [icon]="faGraduationCap"></fa-icon></mzd-icon>
+        <mzd-timeline-content class="add-pad">
+          <div class="head">Bachelor of Technology in Computer Science (Aug 2017 - May 2021)</div>
+          <div class="italic bot-mar-1">The Indian Institute of Information Technology, Sri City, India</div>
+        
+          Relevant Courses: Deep Learning, Natural Language Processing, High Performance Computing, Data Analytics, Computer Vision, Machine Learning.
+        </mzd-timeline-content>
+        
+        </mzd-timeline>
+      </div>
+    </div><br>
 </div>
+<div *ngIf="type == 'me'">
+  <mat-card class="skill-card">
+    <mat-card-header>
+      <mat-card-title>Skills</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div fxLayout="row wrap" fxLayoutAlign="center start">
+        <div fxLayout="column" class="margin-skill" fxLayoutAlign="center start">
+          <div class="head">
+            Languages
+          </div>
+          <div fxLayout="row wrap">
+            <button class="skill-but" mat-flat-button color="primary">Primary</button>
+            <button class="skill-but" mat-flat-button color="primary">Python</button>
+            <button class="skill-but" mat-flat-button color="primary">Java</button>
+            <button class="skill-but" mat-flat-button color="primary">C++</button>
+            <button class="skill-but" mat-flat-button color="primary">JavaScript</button>
+            <button class="skill-but" mat-flat-button color="primary">TypeScript</button>
+            <button class="skill-but" mat-flat-button color="primary">SQL</button>
+          </div>
+        </div>
+        <div fxLayout="column" class="margin-skill" fxLayoutAlign="center start">
+          <div class="head">Machine Learning</div>
+          <div fxLayout="row wrap">
+            <button class="skill-but" mat-flat-button color="primary">TensorFlow</button>
+            <button class="skill-but" mat-flat-button color="primary">PyTorch</button>
+            <button class="skill-but" mat-flat-button color="primary">Keras</button>
+            <button class="skill-but" mat-flat-button color="primary">Scikit-Learn</button>
+            <button class="skill-but" mat-flat-button color="primary">NLTK</button>
+          </div>
+        </div>
+        <div fxLayout="column" class="margin-skill" fxLayoutAlign="center start">
+          <div class="head">Front End</div>
+          <div fxLayout="row wrap">
+            <button class="skill-but blue" mat-stroked-button color="primary">Angular</button>
+            <button class="skill-but blue" mat-stroked-button color="primary">ReactJS</button>
+            <button class="skill-but blue" mat-stroked-button color="primary">Flutter</button>
+            <button class="skill-but blue" mat-stroked-button color="primary">HTML</button>
+            <button class="skill-but blue" mat-stroked-button color="primary">CSS</button>
+            <button class="skill-but blue" mat-stroked-button color="primary">Bootstrap</button>
+          </div>
+        </div>
+        <div fxLayout="column" class="margin-skill" fxLayoutAlign="center start">
+          <div class="head">Back End</div>
+          <div fxLayout="row wrap">
+            <button class="skill-but blue" mat-stroked-button color="primary">NodeJS</button>
+            <button class="skill-but blue" mat-stroked-button color="primary">Springboot</button>
+            <button class="skill-but blue" mat-stroked-button color="primary">MongoDB</button>
+            <button class="skill-but blue" mat-stroked-button color="primary">MySQL</button>
+            <button class="skill-but blue" mat-stroked-button color="primary">Django</button>
+            <button class="skill-but blue" mat-stroked-button color="primary">Flask</button>
+          </div>
+        </div>
+        <div fxLayout="column" class="margin-skill" fxLayoutAlign="center start">
+          <div class="head">Data Analysis</div>
+          <div fxLayout="row wrap">
+            <button class="skill-but" mat-flat-button color="primary">Numpy</button>
+            <button class="skill-but" mat-flat-button color="primary">Pandas</button>
+            <button class="skill-but" mat-flat-button color="primary">MATLAB</button>
+            <button class="skill-but" mat-flat-button color="primary">R</button>
+          </div>
+        </div>
+        <div fxLayout="column" class="margin-skill" fxLayoutAlign="center start">
+          <div class="head">Methodologies</div>
+          <div fxLayout="row wrap">
+            <button class="skill-but" mat-flat-button color="primary">Agile</button>
+            <button class="skill-but" mat-flat-button color="primary">Scrum</button>
+            <button class="skill-but" mat-flat-button color="primary">Kanban</button>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
