@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HomeService } from './home.service';
 
 @Component({
   selector: 'app-root',
@@ -6,8 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  constructor(public homeService: HomeService) { }
+
   title = 'find-user';
-  type = 'me';
   
   
   link(type:any){

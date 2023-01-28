@@ -156,4 +156,13 @@ viewResume() {
     }
   }
 
+  changeView(){
+    this.homeService.type = 'home';
+    this.type = 'home';
+  }
+
+  openLink(link:any){
+    window.open(link, "_blank");
+  }
+
 }

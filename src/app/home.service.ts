@@ -6,6 +6,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 })
 export class HomeService {
   
+  type='me';
   nodeURL = 'https://serverless-tweet.azurewebsites.net/api/HttpTrigger3?code=7J111qj4uroIibIKhVlrOnXLA6IWqu2kPCj7IGL_azqMAzFunK1Y2Q==';
   constructor(private http: HttpClient,) { }
 

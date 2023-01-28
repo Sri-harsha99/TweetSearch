@@ -90,6 +90,9 @@
 .margin-left-5{
     margin-left: 5vw;
 }
+.padding-left-2{
+  padding-left: 2rem;
+}
 .filter{
     margin-top: -3vh;
 }
@@ -101,13 +104,16 @@
     border: 0px;
     outline: none;
   }
-
+.white{
+  background-color: white;
+  margin-right: 0.5rem;
+}
 .example-card{
   max-width: 460px;
 }
 .link-css{
   text-decoration: none;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
   font-size: 14px;
 }
 .margin-right-2{
@@ -119,7 +125,6 @@
 }
 .mail-icon{
   width: 1.5rem;
-  margin-right: 0.5rem;
 }
 .margin-bot-3{
   margin-bottom: 3rem;
@@ -153,6 +158,15 @@
 .skill-card{
   width: 95%;
   margin-left: 2rem;
+  margin-bottom: 3rem;
+}
+.op-null{
+  opacity: 0;
+}
+.news-img{
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
 }
 .italic{
   font-style: italic;
@@ -163,6 +177,7 @@
 
 .margin-skill{
   width: 45%;
+  margin-bottom: 3rem;
 }
 
 .skill-but{
@@ -173,4 +188,30 @@
 .blue{
   background-color: blanchedalmond;
   color: black;
+}
+
+.head-left{
+  margin-left: 2rem;
+}
+.icon-align{
+  color: white;
+}
+
+.skill-mar{
+  margin-left: 2rem;
+}
+
+.head-bot{
+  margin-top: 0.75rem;
+}
+.proj-action{
+  width: 100%;
+  margin-top: 1rem;
+}
+.back-icon{
+  background-color: #86a397;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  margin-right: 0.5rem;
 }
