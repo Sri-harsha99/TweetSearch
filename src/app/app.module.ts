@@ -43,11 +43,13 @@ import { SpinnersAngularModule } from 'spinners-angular';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MzdTimelineModule } from 'ngx-mzd-timeline';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MiniPlayerComponent } from './mini-player/mini-player.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    MiniPlayerComponent
   ],
   imports: [
     BrowserModule,
