@@ -55,6 +55,19 @@
       </h1>
     </div>
     <app-mini-player></app-mini-player>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <h1 class="heading"></h1>
+      <div class="padding-left-2"><h2>TweetSearch</h2></div>
+        <img src="../../assets/flow-d.png">
+        <div class="margin-top-2 font-15">
+            <ul>
+                <li>The classification of tweets into postive and negative sentiments is done by using a logistic regression model trained on 1.6 million tweet dataset.</li>
+                <li>Later, the model has been imported into a flask app that is now running using Azure functions.</li>
+                <li>A nodeJS function is used to pull the data from the twitter API, and push it to flask function. Flask function returns with predictions.</li>
+                <li>Tweets are segragated and the data is shown using pie chart on the client browser using Angular.</li>
+              </ul>  
+        </div>
+    </div>
     <div *ngIf="done && !isCall" fxLayoutAlign="center enter">
         <canvas baseChart
             [type]="'pie'"
