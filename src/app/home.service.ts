@@ -6,7 +6,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 })
 export class HomeService {
   
-  type='home';
+  type='me';
   nodeURL = 'http://localhost:3000/';
   constructor(private http: HttpClient,) { }
 
