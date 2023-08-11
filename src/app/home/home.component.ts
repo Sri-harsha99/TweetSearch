@@ -6,15 +6,10 @@ import {
   HttpParams,
 } from "@angular/common/http";
 import { HomeService } from '../home.service';
-import * as tf from '@tensorflow/tfjs';
-import words from '../../assets/word_dict.json';
-import { ChartOptions } from 'chart.js';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { any } from '@tensorflow/tfjs';
 import { faBriefcase } from '@fortawesome/free-solid-svg-icons';
 import { faGraduationCap } from '@fortawesome/free-solid-svg-icons';
-import { faCode } from '@fortawesome/free-solid-svg-icons';
 import { faDatabase } from '@fortawesome/free-solid-svg-icons';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
@@ -72,9 +67,7 @@ export class HomeComponent implements OnInit {
   countError = false;
   @Input() type!: string;
   nodeURL = 'https://serverless-tweet.azurewebsites.net/api/HttpTrigger3?code=7J111qj4uroIibIKhVlrOnXLA6IWqu2kPCj7IGL_azqMAzFunK1Y2Q==';
-  public pieChartOptions: ChartOptions<'pie'> = {
-    responsive: false,
-  };
+  public pieChartOptions: any;
   public pieChartLabels = [ [ 'Negative'], [ 'Positive']];
   public pieChartDatasets = [ {
     data: [ 300, 500]
