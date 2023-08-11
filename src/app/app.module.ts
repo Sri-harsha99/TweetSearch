@@ -29,7 +29,6 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
-import { NgChartsModule } from 'ng2-charts';
 import { MatSliderModule } from "@angular/material/slider";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -59,7 +58,6 @@ import { ModelViewerComponent } from './model-viewer/model-viewer.component'
   ],
   imports: [
     BrowserModule,
-    NgChartsModule,
     AppRoutingModule,
     FontAwesomeModule,
     MatChipsModule,
