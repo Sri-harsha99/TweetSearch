@@ -24,6 +24,7 @@
     "@fortawesome/angular-fontawesome": "^0.11.1",
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "find-user": "file:",
     "font-awesome": "^4.7.0",
     "ngx-material-timepicker": "^5.5.3",
     "ngx-mzd-timeline": "^1.0.3",
